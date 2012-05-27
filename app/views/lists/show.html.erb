@@ -1,0 +1,39 @@
+<div class="page-header">
+  <h1><%= @list.name %></h1>
+</div>
+
+<div class="row">
+  <%= @list.description %>
+</div>
+
+<h3>Tasks</h3>
+
+<ul>
+  <% @list.tasks.each do |task| %>
+    <li>
+      <%= content_tag :span, :class => task.completed? ? "completed" : nil  do %>
+        <%= task.description %>
+      <% end %>
+
+      <% unless task.completed? %>
+        <%= link_to "Done", [:complete, @list, task], :method => :put %>
+      <% end %>
+
+      <%= link_to "Delete", [@list, task], :method => :delete %>
+    </li>
+  <% end %>
+</ul>
+
+
+<h4>Add task</h4>
+
+<%= form_for [@list, Task.new] do |f| %>
+  <%= f.text_area :description, :class => "input-xlarge", :rows => "2" %>
+  <div>
+    <%= f.submit nil, :class => "btn btn-primary" %>
+  </div>
+<% end %>
+
+<p>
+  <%= link_to "View lists", lists_path %>
+</p>

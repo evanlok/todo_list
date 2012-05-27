@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h1>New List</h1>
+</div>
+
+<ul class="form-errors">
+  <% @list.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+
+<%= form_for @list do |f| %>
+  <%= f.label "Name" %>
+  <%= f.text_field :name, :class => "span3" %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, :class => "input-xlarge", :rows => "5" %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => "btn btn-primary" %>
+    <%= link_to "Cancel", lists_path %>
+  </div>
+<% end %>
